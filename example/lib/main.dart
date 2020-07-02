@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:headset_event/headset_event.dart';
+import 'package:headset_connection_event/headset_event.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,7 +17,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     /// if headset is plugged
-    headsetPlugin.getCurrentState.then((_val){
+    headsetPlugin.getCurrentState.then((_val) {
       setState(() {
         headsetEvent = _val;
       });
@@ -39,10 +39,13 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Headset Event Plugin'),
         ),
         body: Center(
-          child:Column(
+            child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(Icons.headset, color: this.headsetEvent == HeadsetState.CONNECT ? Colors.green : Colors.red,),
+            Icon(
+              Icons.headset,
+              color: this.headsetEvent == HeadsetState.CONNECT ? Colors.green : Colors.red,
+            ),
             Text('State : $headsetEvent\n'),
           ],
         )),

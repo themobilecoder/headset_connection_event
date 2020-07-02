@@ -1,21 +1,21 @@
 PODS:
   - Flutter (1.0.0)
-  - headset_event (0.0.1):
+  - headset_connection_event (0.0.1):
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - headset_event (from `.symlinks/plugins/headset_event/ios`)
+  - headset_connection_event (from `.symlinks/plugins/headset_connection_event/ios`)
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  headset_event:
-    :path: ".symlinks/plugins/headset_event/ios"
+  headset_connection_event:
+    :path: ".symlinks/plugins/headset_connection_event/ios"
 
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  headset_event: 7e97247360e17f7a182fcd35a65ebfcbf9a8fac9
+  headset_connection_event: 16b543526b51010174b267fd5feb139d97584891
 
 PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 

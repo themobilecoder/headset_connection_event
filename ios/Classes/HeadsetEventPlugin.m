@@ -1,5 +1,5 @@
 #import "HeadsetEventPlugin.h"
-#import <headset_event/headset_event-Swift.h>
+#import <headset_connection_event/headset_connection_event-Swift.h>
 
 @implementation HeadsetEventPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {

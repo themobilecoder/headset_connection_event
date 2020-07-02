@@ -17,7 +17,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  headset_event:
+  headset_connection_event:
     path: ../
 
 # For information on the generic Dart part of this file, see the
