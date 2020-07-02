@@ -1,3 +1,8 @@
+## 1.0.0
+
+- Fix Swift Errors
+- Add bluetooth connection events for Android
+
 ## 0.0.2
 
 Example more details
