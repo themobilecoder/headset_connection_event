@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'package:flutter/services.dart';
-import 'package:meta/meta.dart' show visibleForTesting;
-
 
 typedef DetectPluggedCallback = Function(HeadsetState payload);
 
@@ -13,21 +11,18 @@ enum HeadsetState {
 }
 
 class HeadsetEvent {
-  
   static HeadsetEvent _instance;
   final MethodChannel _channel;
   DetectPluggedCallback detectPluggedCallback;
 
-  factory HeadsetEvent() {    
+  factory HeadsetEvent() {
     if (_instance == null) {
-      final MethodChannel methodChannel =
-          const MethodChannel('flutter.moum/headset_event');
+      final MethodChannel methodChannel = const MethodChannel('flutter.moum/headset_event');
       _instance = HeadsetEvent.private(methodChannel);
     }
     return _instance;
   }
-  
-  @visibleForTesting
+
   HeadsetEvent.private(this._channel);
 
   Future<String> get platformVersion async {
@@ -37,7 +32,7 @@ class HeadsetEvent {
 
   Future<HeadsetState> get getCurrentState async {
     final int state = await _channel.invokeMethod('getCurrentState');
-    switch(state) {
+    switch (state) {
       case 0:
         return Future.value(HeadsetState.DISCONNECT);
       case 1:
@@ -54,7 +49,7 @@ class HeadsetEvent {
   }
 
   Future<dynamic> _handleMethod(MethodCall call) async {
-    switch(call.method) {
+    switch (call.method) {
       case "connect":
         return detectPluggedCallback(HeadsetState.CONNECT);
       case "disconnect":
@@ -68,6 +63,4 @@ class HeadsetEvent {
         return detectPluggedCallback(HeadsetState.DISCONNECT);
     }
   }
-
-
 }
