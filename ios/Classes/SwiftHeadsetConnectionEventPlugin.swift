@@ -3,22 +3,20 @@ import UIKit
 import AVFoundation
 
 
-public class SwiftHeadsetEventPlugin: NSObject, FlutterPlugin {
-    
+public class SwiftHeadsetConnectionEventPlugin: NSObject, FlutterPlugin {
     var channel : FlutterMethodChannel?
     
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let channel = FlutterMethodChannel(name: "flutter.moum/headset_event", binaryMessenger: registrar.messenger())
-        let instance = SwiftHeadsetEventPlugin()
+        let channel = FlutterMethodChannel(name: "flutter.moum/headset_connection_event", binaryMessenger: registrar.messenger())
+        let instance = SwiftHeadsetConnectionEventPlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
         
         instance.channel = channel
-        
     }
+    
+    
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        if (call.method == "getPlatformVersion"){
-            result("iOS " + UIDevice.current.systemVersion)
-        }else if (call.method == "getCurrentState"){
+        if (call.method == "getCurrentState"){
             result(HeadsetIsConnect())
         }
     }
@@ -26,9 +24,7 @@ public class SwiftHeadsetEventPlugin: NSObject, FlutterPlugin {
     public override init() {
         super.init()
         registerAudioRouteChangeBlock()
-        
     }
-    
     
     // AVAudioSessionRouteChange notification is Detaction Headphone connection status
     //(https://developer.apple.com/documentation/avfoundation/avaudiosession/responding_to_audio_session_route_changes)
@@ -37,12 +33,11 @@ public class SwiftHeadsetEventPlugin: NSObject, FlutterPlugin {
     // So we should using blcoking.
     /////////////////////////////////////////////////////////////
     func registerAudioRouteChangeBlock(){
-        
         NotificationCenter.default.addObserver( forName:AVAudioSession.routeChangeNotification, object: AVAudioSession.sharedInstance(), queue: nil) { notification in
             guard let userInfo = notification.userInfo,
-                let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
-                let reason = AVAudioSession.RouteChangeReason(rawValue:reasonValue) else {
-                    return
+                  let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
+                  let reason = AVAudioSession.RouteChangeReason(rawValue:reasonValue) else {
+                return
             }
             switch reason {
             case .newDeviceAvailable:
@@ -59,7 +54,7 @@ public class SwiftHeadsetEventPlugin: NSObject, FlutterPlugin {
         for output in currentRoute.outputs {
             if output.portType == AVAudioSession.Port.headphones {
                 return 1
-            }else {
+            } else {
                 return 0
             }
         }

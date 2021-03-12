@@ -9,47 +9,46 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  HeadsetEvent headsetPlugin = new HeadsetEvent();
-  HeadsetState headsetEvent;
+  final _headsetPlugin = HeadsetEvent();
+  HeadsetState? _headsetState;
 
   @override
   void initState() {
     super.initState();
 
     /// if headset is plugged
-    headsetPlugin.getCurrentState.then((_val) {
+    _headsetPlugin.getCurrentState.then((_val) {
       setState(() {
-        headsetEvent = _val;
+        _headsetState = _val;
       });
     });
 
     /// Detect the moment headset is plugged or unplugged
-    headsetPlugin.setListener((_val) {
+    _headsetPlugin.setListener((_val) {
       setState(() {
-        headsetEvent = _val;
+        _headsetState = _val;
       });
     });
   }
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Headset Event Plugin'),
-        ),
-        body: Center(
+  Widget build(BuildContext context) => MaterialApp(
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text('Headset Event Plugin'),
+          ),
+          body: Center(
             child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              Icons.headset,
-              color: this.headsetEvent == HeadsetState.CONNECT ? Colors.green : Colors.red,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Icon(
+                  Icons.headset,
+                  color: this._headsetState == HeadsetState.CONNECT ? Colors.green : Colors.red,
+                ),
+                Text('State : $_headsetState\n'),
+              ],
             ),
-            Text('State : $headsetEvent\n'),
-          ],
-        )),
-      ),
-    );
-  }
+          ),
+        ),
+      );
 }
