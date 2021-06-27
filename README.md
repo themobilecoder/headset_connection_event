@@ -10,7 +10,7 @@ Migrated to AndroidX
 
 | Platform    | Physical Headset | Bluetooth |
 | ----------- | ---------------- | --------- |
-| iOS         | ✅               |           |
+| iOS         | ✅               | ✅        |
 | Android     | ✅               | ✅        |
 
 
