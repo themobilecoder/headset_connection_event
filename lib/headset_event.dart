@@ -22,7 +22,8 @@ class HeadsetEvent {
 
   factory HeadsetEvent() {
     if (_instance == null) {
-      final methodChannel = const MethodChannel('flutter.moum/headset_connection_event');
+      final methodChannel =
+          const MethodChannel('flutter.moum/headset_connection_event');
       _instance = HeadsetEvent.private(methodChannel);
     }
 
