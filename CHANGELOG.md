@@ -1,3 +1,7 @@
+## 2.1.0
+
+- Add iOS bluetooth state listener 
+
 ## 2.0.0
 
 - Null safety support
