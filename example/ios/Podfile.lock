@@ -1,6 +1,6 @@
 PODS:
   - Flutter (1.0.0)
-  - headset_connection_event (0.0.1):
+  - headset_connection_event (2.0.0):
     - Flutter
 
 DEPENDENCIES:
@@ -15,8 +15,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
-  headset_connection_event: a5a58cead15b3d2473d9c325a239115f67d525ac
+  headset_connection_event: dff00e1ba7463daf6696e764c5b0dddd7bb685b3
 
 PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.9.1
