@@ -11,6 +11,14 @@ enum HeadsetState {
   PREV,
 }
 
+/*
+The HeadsetEvent class allows you to listen to different headset status changes.
+These status changes include plugging in and out of physical headset to your phone,
+connecting, and disconnecting of bluetooth devices.
+
+Usage: Instantiate a [HeadsetEvent] by using a factory constructor. Under the hood,
+this constructor will always return a single instance if one has been instantiated before.
+*/
 class HeadsetEvent {
   static HeadsetEvent? _instance;
 
@@ -30,6 +38,7 @@ class HeadsetEvent {
     return _instance!;
   }
 
+  //Reads asynchronously the current state of the headset with type [HeadsetState]
   Future<HeadsetState?> get getCurrentState async {
     final state = await _channel.invokeMethod<int?>('getCurrentState');
 
@@ -43,6 +52,8 @@ class HeadsetEvent {
     }
   }
 
+  //Sets a callback that is called whenever a change in [HeadsetState] happens.
+  //Callback function [onPlugged] must accept a [HeadsetState] parameter.
   void setListener(DetectPluggedCallback onPlugged) {
     _detectPluggedCallback = onPlugged;
     _channel.setMethodCallHandler(_handleMethod);
