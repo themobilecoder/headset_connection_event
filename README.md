@@ -2,7 +2,7 @@
 
 A Flutter plugin to get a headset event.
 
-*This is a clone of [headset_event](https://github.com/flutter-moum/flutter_headset_event), but with fix on swift errors and bluetooth connection events for Android*
+*This is a clone of [headset_event](https://github.com/flutter-moum/flutter_headset_event), but with fix on swift errors and bluetooth connection events for Android and iOS*
 
 Migrated to AndroidX
 
@@ -10,7 +10,7 @@ Migrated to AndroidX
 
 | Platform    | Physical Headset | Bluetooth |
 | ----------- | ---------------- | --------- |
-| iOS         | ✅               |           |
+| iOS         | ✅               | ✅        |
 | Android     | ✅               | ✅        |
 
 
