@@ -19,7 +19,6 @@ public class HeadsetBroadcastReceiver extends BroadcastReceiver {
         switch (intent.getAction()) {
             case Intent.ACTION_HEADSET_PLUG:
                 final int state = intent.getIntExtra("state", -1);
-                HeadsetConnectionEventPlugin.currentState = state;
 
                 switch (state) {
                     case 0:

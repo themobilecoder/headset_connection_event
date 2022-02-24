@@ -28,11 +28,13 @@ public class HeadsetConnectionEventPlugin implements FlutterPlugin, MethodCallHa
     private final HeadsetEventListener headsetEventListener = new HeadsetEventListener() {
         @Override
         public void onHeadsetConnect() {
+            currentState = 1;
             channel.invokeMethod("connect", "true");
         }
 
         @Override
         public void onHeadsetDisconnect() {
+            currentState = 0;
             channel.invokeMethod("disconnect", "true");
         }
 
