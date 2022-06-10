@@ -46,20 +46,16 @@ To use this plugin, add `headset_connection_event` as a [dependency in your pubs
 
 Make the following changes to your project's main `AndroidManifest.xml` file:
 ```xml
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yourapp.com">...
-  <!-- ADD THESE THREE PERMISSIONS -->
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+<activity...
+ android:exported="true"
   
-  <application ...>
     
     ...
     
 
     <!-- ADD THIS "RECEIVER" element -->
-<receiver android:name="flutter.moum.headset_event.HeadsetBroadcastReceiver" >
+  <receiver android:name="flutter.moum.headset_event.HeadsetBroadcastReceiver"
+        android:exported="true">
            <intent-filter>
                <action android:name="android.intent.action.HEADSET_PLUG" />
                <action android:name="android.intent.action.MEDIA_BUTTON" />
@@ -67,4 +63,9 @@ Make the following changes to your project's main `AndroidManifest.xml` file:
        </receiver>
   </application>
 </manifest>
+```
+
+Android 12 requires bluetoothConnect permission. You may request it using the following:
+``` dart
+HeadsetPlugin.requestPermission();
 ```
