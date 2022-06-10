@@ -41,3 +41,30 @@ To use this plugin, add `headset_connection_event` as a [dependency in your pubs
       });
     });
 ```
+
+### Android setup
+
+Make the following changes to your project's main `AndroidManifest.xml` file:
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yourapp.com">...
+  <!-- ADD THESE THREE PERMISSIONS -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+  
+  <application ...>
+    
+    ...
+    
+
+    <!-- ADD THIS "RECEIVER" element -->
+<receiver android:name="flutter.moum.headset_event.HeadsetBroadcastReceiver" >
+           <intent-filter>
+               <action android:name="android.intent.action.HEADSET_PLUG" />
+               <action android:name="android.intent.action.MEDIA_BUTTON" />
+           </intent-filter>
+       </receiver>
+  </application>
+</manifest>
+```
