@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/services.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 typedef DetectPluggedCallback = Function(HeadsetState payload);
 
@@ -30,8 +32,7 @@ class HeadsetEvent {
 
   factory HeadsetEvent() {
     if (_instance == null) {
-      final methodChannel =
-          const MethodChannel('flutter.moum/headset_connection_event');
+      final methodChannel = const MethodChannel('flutter.moum/headset_connection_event');
       _instance = HeadsetEvent.private(methodChannel);
     }
 
@@ -50,6 +51,13 @@ class HeadsetEvent {
       default:
         return null;
     }
+  }
+
+  Future<bool> requestPermission() async {
+    if (!Platform.isAndroid) {
+      return true;
+    }
+    return Permission.bluetoothConnect.request().isGranted;
   }
 
   //Sets a callback that is called whenever a change in [HeadsetState] happens.

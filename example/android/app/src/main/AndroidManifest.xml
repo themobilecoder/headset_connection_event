@@ -6,6 +6,7 @@
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
+            android:exported="true"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
@@ -37,7 +38,8 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-       <receiver android:name="flutter.moum.headset_event.HeadsetBroadcastReceiver" >
+        <receiver android:name="flutter.moum.headset_event.HeadsetBroadcastReceiver"
+        android:exported="true">
            <intent-filter>
                <action android:name="android.intent.action.HEADSET_PLUG" />
                <action android:name="android.intent.action.MEDIA_BUTTON" />
