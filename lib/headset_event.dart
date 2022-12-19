@@ -32,7 +32,8 @@ class HeadsetEvent {
 
   factory HeadsetEvent() {
     if (_instance == null) {
-      final methodChannel = const MethodChannel('flutter.moum/headset_connection_event');
+      final methodChannel =
+          const MethodChannel('flutter.moum/headset_connection_event');
       _instance = HeadsetEvent.private(methodChannel);
     }
 
@@ -49,7 +50,7 @@ class HeadsetEvent {
       case 1:
         return HeadsetState.CONNECT;
       default:
-        return null;
+        return HeadsetState.DISCONNECT;
     }
   }
 
