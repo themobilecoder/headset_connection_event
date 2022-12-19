@@ -4,7 +4,9 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 
@@ -20,6 +22,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
  */
 public class HeadsetConnectionEventPlugin implements FlutterPlugin, MethodCallHandler {
     public static int currentState = -1;
+    private AudioManager audioManager;
 
     /// The MethodChannel that will the communication between Flutter and native Android
     ///
@@ -63,13 +66,32 @@ public class HeadsetConnectionEventPlugin implements FlutterPlugin, MethodCallHa
         filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
         flutterPluginBinding.getApplicationContext().registerReceiver(hReceiver, filter);
 
-        AudioManager audioManager = (AudioManager)flutterPluginBinding.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
-        currentState = audioManager.isWiredHeadsetOn() || audioManager.isBluetoothA2dpOn() ? 1 : 0;
+        audioManager = (AudioManager)flutterPluginBinding.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+        currentState = getConnectedHeadset(audioManager) ? 1: 0;
+    }
+
+    private boolean getConnectedHeadset(AudioManager audioManager) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return audioManager.isWiredHeadsetOn() || audioManager.isBluetoothA2dpOn() || audioManager.isBluetoothScoOn();
+        } else {
+            AudioDeviceInfo[] devices = audioManager.getDevices(AudioManager.GET_DEVICES_OUTPUTS);
+
+            for (AudioDeviceInfo device : devices) {
+                if (device.getType() == AudioDeviceInfo.TYPE_WIRED_HEADSET
+                        || device.getType() == AudioDeviceInfo.TYPE_WIRED_HEADPHONES
+                        || device.getType() == AudioDeviceInfo.TYPE_BLUETOOTH_A2DP
+                        || device.getType() == AudioDeviceInfo.TYPE_BLUETOOTH_SCO) {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
         if (call.method.equals("getCurrentState")) {
+            currentState = getConnectedHeadset(audioManager) ? 1: 0;
             result.success(currentState);
         } else {
             result.notImplemented();
