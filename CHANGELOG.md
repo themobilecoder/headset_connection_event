@@ -1,3 +1,8 @@
+## 2.2.0
+- Add Android 12 support
+- Fix failing tests
+- Refactors
+
 ## 2.1.0
 
 - Add iOS bluetooth state listener 
