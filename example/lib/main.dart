@@ -16,6 +16,9 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
+    ///Request Permissions (Required for Android 12)
+    _headsetPlugin.requestPermission();
+
     /// if headset is plugged
     _headsetPlugin.getCurrentState.then((_val) {
       setState(() {
