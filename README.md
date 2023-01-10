@@ -44,6 +44,8 @@ To use this plugin, add `headset_connection_event` as a [dependency in your pubs
 
 ### Android setup
 
+Update `compileSdkVersion` to **33** in your `build.properties` under `app` directory
+
 Make the following changes to your project's main `AndroidManifest.xml` file:
 ```xml
 <activity...
