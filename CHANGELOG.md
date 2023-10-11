@@ -1,3 +1,6 @@
+## 3.1.0
+- Update `permission_handler` version
+
 ## 3.0.0
 **Breaking Change**
 - When using in Android, update `compileSdkVersion` to 33
