@@ -24,6 +24,35 @@ public class SwiftHeadsetConnectionEventPlugin: NSObject, FlutterPlugin {
     public override init() {
         super.init()
         registerAudioRouteChangeBlock()
+        setupRemoteCommandCenter()
+    }
+
+    private func setupRemoteCommandCenter() {
+        let commandCenter = MPRemoteCommandCenter.shared()
+
+        commandCenter.playCommand.isEnabled = true
+        commandCenter.playCommand.addTarget { event in
+            print("Play command received")
+            return .success
+        }
+
+        commandCenter.pauseCommand.isEnabled = true
+        commandCenter.pauseCommand.addTarget { event in
+            print("Pause command received")
+            return .success
+        }
+        
+        commandCenter.nextTrackCommand.isEnabled = true
+        commandCenter.nextTrackCommand.addTarget { event in
+            print("Next track command received")
+            return .success
+        }
+        
+        commandCenter.previousTrackCommand.isEnabled = true
+        commandCenter.previousTrackCommand.addTarget { event in
+            print("Previous track command received")
+            return .success
+        }
     }
     
     // AVAudioSessionRouteChange notification is Detaction Headphone connection status
