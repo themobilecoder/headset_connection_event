@@ -80,7 +80,9 @@ public class HeadsetConnectionEventPlugin implements FlutterPlugin, MethodCallHa
                 if (device.getType() == AudioDeviceInfo.TYPE_WIRED_HEADSET
                         || device.getType() == AudioDeviceInfo.TYPE_WIRED_HEADPHONES
                         || device.getType() == AudioDeviceInfo.TYPE_BLUETOOTH_A2DP
-                        || device.getType() == AudioDeviceInfo.TYPE_BLUETOOTH_SCO) {
+                        || device.getType() == AudioDeviceInfo.TYPE_BLUETOOTH_SCO
+                        || device.getType() == AudioDeviceInfo.TYPE_USB_DEVICE
+                        || device.getType() == AudioDeviceInfo.TYPE_USB_HEADSET) {
                     return true;
                 }
             }
