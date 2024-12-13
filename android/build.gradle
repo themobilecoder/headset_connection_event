@@ -24,6 +24,10 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 30
 
+    if (project.android.hasProperty("namespace")) {
+        namespace 'flutter.moum.headset_connection_event'
+    }
+
     defaultConfig {
         minSdkVersion 16
     }
