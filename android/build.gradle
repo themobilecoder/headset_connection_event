@@ -22,7 +22,7 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 34
 
     if (project.android.hasProperty("namespace")) {
         namespace 'flutter.moum.headset_connection_event'
