@@ -1,3 +1,7 @@
+## 4.0.1
+
+- Remove reference to old PluginRegistry.Registrar
+
 ## 4.0.0
 
 - Update android to compile with latest Flutter version

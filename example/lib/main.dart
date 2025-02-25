@@ -4,8 +4,10 @@ import 'package:headset_connection_event/headset_event.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
@@ -20,16 +22,16 @@ class _MyAppState extends State<MyApp> {
     _headsetPlugin.requestPermission();
 
     /// if headset is plugged
-    _headsetPlugin.getCurrentState.then((_val) {
+    _headsetPlugin.getCurrentState.then((value) {
       setState(() {
-        _headsetState = _val;
+        _headsetState = value;
       });
     });
 
     /// Detect the moment headset is plugged or unplugged
-    _headsetPlugin.setListener((_val) {
+    _headsetPlugin.setListener((value) {
       setState(() {
-        _headsetState = _val;
+        _headsetState = value;
       });
     });
   }
@@ -46,7 +48,7 @@ class _MyAppState extends State<MyApp> {
               children: <Widget>[
                 Icon(
                   Icons.headset,
-                  color: this._headsetState == HeadsetState.CONNECT
+                  color: _headsetState == HeadsetState.CONNECT
                       ? Colors.green
                       : Colors.red,
                 ),

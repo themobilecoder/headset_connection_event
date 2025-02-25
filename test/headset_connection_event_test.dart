@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:headset_connection_event/headset_event.dart';
@@ -14,28 +16,28 @@ class MockMethodChannel extends Mock implements MethodChannel {
 }
 
 void main() {
-  late final MockMethodChannel _methodChannel;
-  late final HeadsetEvent _he;
+  late final MockMethodChannel methodChannel;
+  late final HeadsetEvent headsetEvent;
 
   setUp(() {
-    print('setting up');
-    _methodChannel = MockMethodChannel();
-    print('setting headset');
-    _he = HeadsetEvent.private(_methodChannel);
+    log('setting up');
+    methodChannel = MockMethodChannel();
+    log('setting headset');
+    headsetEvent = HeadsetEvent.private(methodChannel);
   });
 
   test('getCurrentState', () async {
-    when(_methodChannel.invokeMethod<int>('getCurrentState'))
+    when(methodChannel.invokeMethod<int>('getCurrentState'))
         .thenAnswer((Invocation invoke) => Future<int?>.value(0));
 
-    expect(await _he.getCurrentState, HeadsetState.DISCONNECT);
+    expect(await headsetEvent.getCurrentState, HeadsetState.DISCONNECT);
 
-    when(_methodChannel.invokeMethod<int>('getCurrentState'))
+    when(methodChannel.invokeMethod<int>('getCurrentState'))
         .thenAnswer((Invocation invoke) => Future<int>.value(1));
-    expect(await _he.getCurrentState, HeadsetState.CONNECT);
+    expect(await headsetEvent.getCurrentState, HeadsetState.CONNECT);
 
-    when(_methodChannel.invokeMethod<int>('getCurrentState'))
+    when(methodChannel.invokeMethod<int>('getCurrentState'))
         .thenAnswer((Invocation invoke) => Future<int>.value(-1));
-    expect(await _he.getCurrentState, HeadsetState.DISCONNECT);
+    expect(await headsetEvent.getCurrentState, HeadsetState.DISCONNECT);
   });
 }
