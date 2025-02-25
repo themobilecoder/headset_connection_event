@@ -2,7 +2,7 @@
 
 A Flutter plugin to get a headset event.
 
-[![.github/workflows/flutter.yaml](https://github.com/themobilecoder/headset_connection_event/actions/workflows/flutter.yaml/badge.svg)](https://github.com/themobilecoder/headset_connection_event/actions/workflows/flutter.yaml)
+[![Flutter](https://github.com/themobilecoder/headset_connection_event/actions/workflows/flutter.yaml/badge.svg)](https://github.com/themobilecoder/headset_connection_event/actions/workflows/flutter.yaml)
 
 _This is a clone of [headset_event](https://github.com/flutter-moum/flutter_headset_event), but with fix on swift errors and bluetooth connection events for Android and iOS_
 
